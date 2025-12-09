@@ -1,0 +1,44 @@
+Interview Database schema:
+
+Submitter
+	SubmitterID (PK)
+	Name
+	Email 
+	AddressID (FK)
+
+
+Address
+	AddressID (PK)
+	Street
+	City
+	State
+	Zip
+
+
+1 to Many relationship (1 Submitter - Many Permit Applications)
+
+PermitApplication
+	PermitID (PK)
+	SubmitterID (FK)
+	PermitType
+	County
+	DateSubmitted
+
+
+
+Sql example:
+-- Find Permits within a date range, grouped by submitter city
+
+DECLARE @StartDate DATE = '2024-01-01';
+DECLARE @EndDate DATE   = '2024-12-31';
+
+SELECT 
+    a.City,
+    COUNT(pa.PermitId) AS TotalPermits
+FROM PermitApplication pa
+JOIN Submitter s ON pa.SubmitterId = s.SubmitterId
+JOIN Address a ON s.AddressId = a.AddressId
+WHERE pa.DateSubmitted BETWEEN @StartDate AND @EndDate
+GROUP BY a.City
+ORDER BY a.City;
+	
