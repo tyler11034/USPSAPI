@@ -1,0 +1,107 @@
+﻿@model PermitApplication.Models.PermitFormViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .swfwmd {
+        font-style: italic;
+        color: blue;
+    }
+</style>
+
+<div class="text-center mb-4">
+    <h1 class="display-4">
+        Welcome to <span class="swfwmd">SWFWMD</span> Permitting
+    </h1>
+</div>
+
+<form asp-action="Index" method="post" class="w-50 mx-auto needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" required />
+        <div class="invalid-feedback">
+            Please enter your name.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Street" class="form-label">Street</label>
+        <input asp-for="Street" class="form-control" required />
+        <div class="invalid-feedback">
+            Please enter your street address.
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="City" class="form-label">City</label>
+            <input asp-for="City" class="form-control" required />
+            <div class="invalid-feedback">
+                Please enter your city.
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="State" class="form-label">State</label>
+            <input asp-for="State" class="form-control" required />
+            <div class="invalid-feedback">
+                Please enter your state.
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="Zip" class="form-label">Zip</label>
+            <input asp-for="Zip" class="form-control" required />
+            <div class="invalid-feedback">
+                Please enter your zip.
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="County" class="form-label"></label>
+        <select asp-for="County" class="form-select" required>
+            <option value="">-- Select County --</option>
+            <option>Hillsborough</option>
+            <option>Pasco</option>
+            <option>Pinellas</option>
+            <option>Polk</option>
+        </select>
+        <div class="invalid-feedback">
+            Please select a county.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Permit Type</label>
+        <div class="form-check">
+            <input type="radio" asp-for="PermitType" value="Water Use Permit" class="form-check-input" required />
+            <label class="form-check-label">Water Use Permit</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" asp-for="PermitType" value="Environmental Resource Permit" class="form-check-input" />
+            <label class="form-check-label">Environmental Resource Permit</label>
+        </div>
+        <div class="invalid-feedback" style="display:none;">
+            Please select a permit type.
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Next Step</button>
+</form>
+
+<script>
+    (() => {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>

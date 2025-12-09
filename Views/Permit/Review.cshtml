@@ -1,0 +1,32 @@
+﻿@model PermitApplication.Models.PermitFormViewModel
+@{
+    ViewData["Title"] = "Review Application";
+}
+
+<h2 class="text-center mb-4">Review Your Permit Application</h2>
+
+<div class="card w-50 mx-auto p-4">
+    <form action="@Url.Action("Submit", "Permit")" method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <p><strong>Name:</strong> @Model.Name</p>
+        <p><strong>Street:</strong> @Model.Street</p>
+        <p><strong>City:</strong> @Model.City</p>
+        <p><strong>State:</strong> @Model.State</p>
+        <p><strong>Zip:</strong> @Model.Zip</p>
+        <p><strong>County:</strong> @Model.County</p>
+        <p><strong>Permit Type:</strong> @Model.PermitType</p>
+
+        <input type="hidden" asp-for="Name" />
+        <input type="hidden" asp-for="Street" />
+        <input type="hidden" asp-for="City" />
+        <input type="hidden" asp-for="State" />
+        <input type="hidden" asp-for="Zip" />
+        <input type="hidden" asp-for="County" />
+        <input type="hidden" asp-for="PermitType" />
+
+        <button type="submit" class="btn btn-success">Submit Application</button>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary ms-2">Edit</a>
+    </form>
+</div>
